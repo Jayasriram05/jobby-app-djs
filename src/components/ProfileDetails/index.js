@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import {Component} from 'react'
 import Loader from 'react-loader-spinner'
 import Cookies from 'js-cookie'
@@ -40,8 +39,6 @@ class ProfileDetails extends Component {
         shortBio: data.profile_details.short_bio,
       }
       this.setState({apiStatus: apiStatusConstants.success, profileData})
-      //   console.log(profileData)
-      //   console.log(typeof profileData)
     } else {
       this.setState({apiStatus: apiStatusConstants.failure})
     }
@@ -53,13 +50,8 @@ class ProfileDetails extends Component {
     return (
       <div className="profile-success-container">
         <img src={profileImageUrl} alt="profile" className="profile-img" />
-        {/* <h1 className="profile-heading">{name}</h1>
-        <p className="profile-bio">{shortBio}</p> */}
-        {/* profile details are obtained from api so i commented them and write my
-        own name */}
-
-        <h1 className="profile-heading">Vijay Harsha Made</h1>
-        <p className="profile-bio">Frontend Developer</p>
+        <h1 className="profile-heading">{name}</h1>
+        <p className="profile-bio">{shortBio}</p>
       </div>
     )
   }
@@ -85,7 +77,6 @@ class ProfileDetails extends Component {
 
   renderProfileDetails = () => {
     const {apiStatus} = this.state
-    // console.log(apiStatus)
 
     switch (apiStatus) {
       case apiStatusConstants.success:
@@ -100,7 +91,6 @@ class ProfileDetails extends Component {
   }
 
   render() {
-    // console.log('render')
     return <>{this.renderProfileDetails()}</>
   }
 }

@@ -5,19 +5,14 @@ import ProfileDetails from '../ProfileDetails'
 import './index.css'
 
 const FiltersGroup = props => {
-  // console.log(props)
   const onChangeSearchInput = event => {
     const {changeSearchInput} = props
     changeSearchInput(event)
-    // console.log(event) lets say word g is pressed in search bar.
-    // that g pressed event is triggered and this event is passed to changeSearchInput which is present in jobs component.
-    // console.log(event.target.value)
   }
 
   const onEnterSearchInput = event => {
     const {getJobs} = props
     if (event.key === 'Enter') {
-      // console.log('Enter button is clicked')
       getJobs()
     }
   }
@@ -49,7 +44,6 @@ const FiltersGroup = props => {
   const onSelectEmployeeType = event => {
     const {changeEmployeeList} = props
     changeEmployeeList(event.target.value)
-    // console.log(event.target.value)
   }
 
   const renderTypeOfEmployment = () => {

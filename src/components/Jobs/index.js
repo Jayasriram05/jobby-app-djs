@@ -72,16 +72,8 @@ class Jobs extends Component {
       apiStatus: apiStatusConstants.inProgress,
     })
     const {employeeTypeList, minimumSalary, searchInput} = this.state
-    // console.log(employeeTypeList)
-    // employeeTypeList is empty array on initial page load when any input of type of employment is clicked
-    // we are setting state of this type in changeEmployeeList function
     const apiUrl = `https://apis.ccbp.in/jobs?employment_type=${employeeTypeList.join()}&minimum_package=${minimumSalary}&search=${searchInput}`
-    // To convert a list of items as a comma-separated string we can use the array method join()
-    //  const fruits = ["Banana", "Orange", "Apple", "Mango"];
-    // console.log(fruits.join()) Banana,Orange,Apple,Mango
-
     const jwtToken = Cookies.get('jwt_token')
-
     const options = {
       headers: {
         Authorization: `Bearer ${jwtToken}`,
@@ -91,7 +83,6 @@ class Jobs extends Component {
     const response = await fetch(apiUrl, options)
     if (response.ok === true) {
       const data = await response.json()
-      //  console.log(data.jobs) array of 60 objects
       const updatedJobsData = data.jobs.map(eachJob => ({
         companyLogoUrl: eachJob.company_logo_url,
         employmentType: eachJob.employment_type,
@@ -184,19 +175,8 @@ class Jobs extends Component {
   }
 
   changeSalary = salaryRangeId => {
-    // console.log(salary)
     this.setState({minimumSalary: salaryRangeId}, this.getJobs)
   }
-
-  //   changeEmployeeList = type => {
-  //     // console.log(type)
-  //     const {employeeType} = this.state
-  //     console.log(employeeType)
-  //     this.setState(
-  //       prev => ({employeeType: [...prev.employeeType, type]}),
-  //       this.getJobs,
-  //     )
-  //   }
 
   changeEmployeeList = type => {
     const {employeeTypeList} = this.state
@@ -204,7 +184,6 @@ class Jobs extends Component {
     const inputNotInList = employeeTypeList.filter(
       eachItem => eachItem === type,
     )
-    // console.log(inputNotInList)
     if (inputNotInList.length === 0) {
       this.setState(
         prevState => ({
@@ -216,7 +195,6 @@ class Jobs extends Component {
       const filteredData = employeeTypeList.filter(
         eachItem => eachItem !== type,
       )
-      // console.log(filteredData)
 
       this.setState({employeeTypeList: filteredData}, this.getJobs)
     }
